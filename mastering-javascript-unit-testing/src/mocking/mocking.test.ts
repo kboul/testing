@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { getPriceInCurrency, getShippingInfo } from "./mocking.js";
-import { getExchangeRate } from "../../lib/getExchangeRate.js";
-import { getShippingQuote } from "../../lib/getShippingQuote.js";
+import { getExchangeRate } from "../lib/getExchangeRate.js";
+import { getShippingQuote } from "../lib/getShippingQuote.js";
 
 describe("mock suite", () => {
   it("mock test case", () => {
@@ -27,7 +27,7 @@ describe("sendMessage", () => {
 
 // we suppose the getExchangeRate function is imported from a library and we mock it
 // this line is hoisted, meaning it is executed first before all the imports
-vi.mock("../../lib/getExchangeRate.js");
+vi.mock("../lib/getExchangeRate.js");
 
 describe("getPriceInCurrency", () => {
   it("should return price in target currency", () => {
@@ -38,7 +38,7 @@ describe("getPriceInCurrency", () => {
   });
 });
 
-vi.mock("../../lib/getShippingQuote.js");
+vi.mock("../lib/getShippingQuote.js");
 
 describe('getShippingQuote', () => {
   it('should return shipping not available if quote is an empty string', () => {

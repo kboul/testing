@@ -1,5 +1,5 @@
-import { getExchangeRate } from "../../lib/getExchangeRate.js";
-import { getShippingQuote } from "../../lib/getShippingQuote.js";
+import { getExchangeRate } from "../lib/getExchangeRate.js";
+import { getShippingQuote } from "../lib/getShippingQuote.js";
 
 export const getPriceInCurrency = (price: number, currency: string) => {
   const rate = getExchangeRate("USD", 1);
