@@ -1,4 +1,5 @@
 import { charge } from "../lib/charge.js";
+import { isValidEmail, sendEmail } from "../lib/email.js";
 import { getExchangeRate } from "../lib/getExchangeRate.js";
 import { getShippingQuote } from "../lib/getShippingQuote.js";
 import { trackPageView } from "../lib/trackPageView.js";
@@ -33,4 +34,13 @@ export async function submitOrder(
     return { success: false, error: "payment_error" };
 
   return { success: true };
+}
+
+// Partial mocking
+export async function signUp(email: string) {
+  if (!isValidEmail(email)) return false;
+
+  await sendEmail(email, "Welcome aboard!");
+
+  return true;
 }

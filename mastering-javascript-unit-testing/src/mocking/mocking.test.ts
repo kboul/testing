@@ -3,12 +3,14 @@ import {
   getPriceInCurrency,
   getShippingInfo,
   renderPage,
+  signUp,
   submitOrder,
 } from "./mocking.js";
 import { getExchangeRate } from "../lib/getExchangeRate.js";
 import { getShippingQuote } from "../lib/getShippingQuote.js";
 import { trackPageView } from "../lib/trackPageView.js";
 import { charge } from "../lib/charge.js";
+import { sendEmail } from "../lib/email.js";
 
 describe("mock suite", () => {
   it("mock test case", () => {
@@ -82,7 +84,7 @@ describe("submitOrder", () => {
   const order = { totalAmount: 10 };
   const creditCard = { creditCardNumber: "1234" };
 
-  // not susre if this is neccessary here because we test submitOrder function and we mock charge function
+  // not sure if this is neccessary here because we test submitOrder function and we mock charge function
   it("should charge the customer", () => {
     vi.mocked(charge).mockResolvedValue({ status: "failed" }); // mockResolve because it returns a promise
 
@@ -101,5 +103,34 @@ describe("submitOrder", () => {
 
     const result = await submitOrder(order, creditCard);
     expect(result).toEqual({ success: true });
+  });
+});
+
+// Partial mocking
+vi.mock("../lib/email.js", async (importOriginal: any) => {
+  const originalModule = await importOriginal();
+  return { ...originalModule, sendEmail: vi.fn() };
+});
+
+describe("signUp", () => {
+  const validEmail = "kostas@gmail.com";
+
+  it("should return false if email is invalid", async () => {
+    const result = await signUp("invalid-email");
+    expect(result).toBeFalsy();
+  });
+
+  it("should return true if email is valid", async () => {
+    const result = await signUp(validEmail);
+    expect(result).toBeTruthy();
+  });
+
+  it("should send the welcome email if email is valid", async () => {
+    await signUp(validEmail);
+    expect(sendEmail).toHaveBeenCalled();
+
+    const args = vi.mocked(sendEmail).mock.calls[0];
+    expect(args[0]).toBe(validEmail);
+    expect(args[1]).toMatch(/welcome/i);
   });
 });
