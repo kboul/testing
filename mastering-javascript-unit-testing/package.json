@@ -16,5 +16,8 @@
   },
   "stackblitz": {
     "startCommand": "npm run test:ui"
+  },
+  "dependencies": {
+    "delay": "^6.0.0"
   }
 }
