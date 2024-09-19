@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
-import { getPriceInCurrency } from "./mocking.js";
+import { getPriceInCurrency, getShippingInfo } from "./mocking.js";
 import { getExchangeRate } from "../../lib/getExchangeRate.js";
+import { getShippingQuote } from "../../lib/getShippingQuote.js";
 
 describe("mock suite", () => {
   it("mock test case", () => {
@@ -36,3 +37,20 @@ describe("getPriceInCurrency", () => {
     expect(price).toBe(15);
   });
 });
+
+vi.mock("../../lib/getShippingQuote.js");
+
+describe('getShippingQuote', () => {
+  it('should return shipping not available if quote is an empty string', () => {
+    vi.mocked(getShippingQuote).mockReturnValue("");
+
+    expect(getShippingInfo("London")).toMatch(/not available/i);
+  })
+
+  it('should return shipping cost and estimated days if destination is not empty string', () => {
+    vi.mocked(getShippingQuote).mockReturnValue({ cost: 10, estimatedDays: 2 });
+
+    expect(getShippingInfo("US")).toMatch("10");
+    expect(getShippingInfo("US")).toMatch(/2 days/i);
+  })
+})
