@@ -1,3 +1,4 @@
+import { charge } from "../lib/charge.js";
 import { getExchangeRate } from "../lib/getExchangeRate.js";
 import { getShippingQuote } from "../lib/getShippingQuote.js";
 import { trackPageView } from "../lib/trackPageView.js";
@@ -19,4 +20,17 @@ export async function renderPage() {
   trackPageView("/home");
 
   return "<div>content</div>";
+}
+
+// Interaction testing
+export async function submitOrder(
+  order: { totalAmount: number },
+  creditCard: { creditCardNumber: string }
+) {
+  const paymentResult = await charge(creditCard, order.totalAmount);
+
+  if (paymentResult.status === "failed")
+    return { success: false, error: "payment_error" };
+
+  return { success: true };
 }

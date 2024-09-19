@@ -1,8 +1,14 @@
 import { describe, expect, it, vi } from "vitest";
-import { getPriceInCurrency, getShippingInfo, renderPage } from "./mocking.js";
+import {
+  getPriceInCurrency,
+  getShippingInfo,
+  renderPage,
+  submitOrder,
+} from "./mocking.js";
 import { getExchangeRate } from "../lib/getExchangeRate.js";
 import { getShippingQuote } from "../lib/getShippingQuote.js";
 import { trackPageView } from "../lib/trackPageView.js";
+import { charge } from "../lib/charge.js";
 
 describe("mock suite", () => {
   it("mock test case", () => {
@@ -67,5 +73,33 @@ describe("renderPage", () => {
   it("should call trackPageView function", async () => {
     await renderPage();
     expect(trackPageView).toHaveBeenCalledWith("/home");
+  });
+});
+
+vi.mock("../lib/charge.js");
+
+describe("submitOrder", () => {
+  const order = { totalAmount: 10 };
+  const creditCard = { creditCardNumber: "1234" };
+
+  // not susre if this is neccessary here because we test submitOrder function and we mock charge function
+  it("should charge the customer", () => {
+    vi.mocked(charge).mockResolvedValue({ status: "failed" }); // mockResolve because it returns a promise
+
+    expect(charge).not.toHaveBeenCalledWith(creditCard, order.totalAmount);
+  });
+
+  it("should return success false and payment error if the payment is not successful", async () => {
+    vi.mocked(charge).mockResolvedValue({ status: "failed" }); // mockResolve because it returns a promise
+
+    const result = await submitOrder(order, creditCard);
+    expect(result).toEqual({ success: false, error: "payment_error" });
+  });
+
+  it("should return success if the payment is successful", async () => {
+    vi.mocked(charge).mockResolvedValue({ status: "success" });
+
+    const result = await submitOrder(order, creditCard);
+    expect(result).toEqual({ success: true });
   });
 });
