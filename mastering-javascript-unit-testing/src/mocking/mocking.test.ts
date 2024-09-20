@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import {
   getDiscount,
   getPriceInCurrency,
@@ -111,6 +111,7 @@ describe("submitOrder", () => {
 });
 
 // Partial mocking
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 vi.mock("../lib/email.js", async (importOriginal: any) => {
   const originalModule = await importOriginal();
   return { ...originalModule, sendEmail: vi.fn() };

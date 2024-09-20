@@ -52,7 +52,7 @@ function calculateDiscount(price: number, discountCode: string) {
 
 // Exercise: positive and negative testing
 function validateUserInput(username: string, age: number) {
-  let errors = [];
+  const errors = [];
 
   if (
     typeof username !== "string" ||

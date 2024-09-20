@@ -6,7 +6,7 @@ import security from "../lib/security.js";
 import { trackPageView } from "../lib/trackPageView.js";
 
 export const getPriceInCurrency = (price: number, currency: string) => {
-  const rate = getExchangeRate("USD", 1);
+  const rate = getExchangeRate("USD", currency);
   return price * rate;
 };
 

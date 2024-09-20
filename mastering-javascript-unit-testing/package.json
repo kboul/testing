@@ -8,11 +8,16 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "lint": "eslint . --fix"
   },
   "devDependencies": {
+    "@eslint/js": "^9.10.0",
     "@vitest/coverage-v8": "^1.4.0",
+    "eslint": "^9.10.0",
+    "globals": "^15.9.0",
     "prettier": "^3.3.3",
+    "typescript-eslint": "^8.6.0",
     "vite": "latest",
     "vitest": "latest"
   },
