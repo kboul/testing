@@ -7,7 +7,7 @@ import {
   login,
   renderPage,
   signUp,
-  submitOrder,
+  submitOrder
 } from "./mocking.js";
 import { getExchangeRate } from "../lib/getExchangeRate.js";
 import { getShippingQuote } from "../lib/getShippingQuote.js";

@@ -10,7 +10,7 @@ import {
   isPriceInRange,
   isValidUsername,
   max,
-  validateUserInput,
+  validateUserInput
 } from "./utils.js";
 
 describe("max", () => {
@@ -162,7 +162,7 @@ describe("isPriceInRange", () => {
     { scenario: "price = min", price: 20, result: true },
     { scenario: "price = max", price: 100, result: true },
     { scenario: "price > min", price: 25, result: true },
-    { scenario: "price between min & max", price: 50, result: true },
+    { scenario: "price between min & max", price: 50, result: true }
   ])(`should return $result when $scenario`, ({ price, result }) => {
     expect(isPriceInRange(price, 0, 100)).toBe(result);
   });
@@ -176,7 +176,7 @@ describe("isPriceInRange", () => {
     { scenario: "price > min", price: 25, result: true },
     { scenario: "price > max", price: 120, result: false },
     { scenario: "min within range", price: 50, result: true },
-    { scenario: "max within range", price: 80, result: true },
+    { scenario: "max within range", price: 80, result: true }
   ])(`should return $result when $scenario`, ({ price, result }) => {
     expect(isPriceInRange(price, 0, 100)).toBe(result);
   });
@@ -206,7 +206,7 @@ describe("canDrive", () => {
     { age: 16, country: "US", result: true },
     { age: 5, country: "US", result: false },
     { age: 5, country: "UK", result: false },
-    { age: 17, country: "UK", result: true },
+    { age: 17, country: "UK", result: true }
   ])(
     "should return $result for ($age, $country)",
     ({ age, country, result }) => {
