@@ -33,7 +33,7 @@ function factorial(number: number) {
 function getCoupons() {
   return [
     { code: "SAVE20NOW", discount: 0.2 },
-    { code: "DISCOUNT50OFF", discount: 0.5 },
+    { code: "DISCOUNT50OFF", discount: 0.5 }
   ];
 }
 
@@ -52,7 +52,7 @@ function calculateDiscount(price: number, discountCode: string) {
 
 // Exercise: positive and negative testing
 function validateUserInput(username: string, age: number) {
-  let errors = [];
+  const errors = [];
 
   if (
     typeof username !== "string" ||
@@ -81,7 +81,7 @@ function isValidUsername(username: string) {
 function canDrive(age: number, countryCode: string) {
   const legalDrivingAge: { [key: string]: number } = {
     US: 16,
-    UK: 17,
+    UK: 17
   };
 
   if (!legalDrivingAge[countryCode]) return "Invalid country code";
@@ -99,5 +99,5 @@ export {
   isPriceInRange,
   isValidUsername,
   max,
-  validateUserInput,
+  validateUserInput
 };
