@@ -1,11 +1,10 @@
 import { items } from "../../app/fundamentals/constants";
-import { getDataTestId } from "../utils";
 
 describe("FundamentalsPage", () => {
   beforeEach(() => cy.visit("/fundamentals"));
 
   it("contais the header with the correct text", () => {
-    cy.get(getDataTestId("fundamentals-header")).contains(/fundamentals/i);
+    cy.getDataTestId("fundamentals-header").contains(/fundamentals/i);
   });
 
   it("should have 8 accordion items", () => {
@@ -13,10 +12,8 @@ describe("FundamentalsPage", () => {
   });
 
   describe("1st item", () => {
-    const firstItem = getDataTestId("accordion-item-1");
-
     it("should have the correct summary", () => {
-      cy.get(firstItem).should((div) => {
+     cy.getDataTestId("accordion-item-1").should((div) => {
         expect(div.text()).to.contain(items[0].summary);
       });
     });
@@ -27,7 +24,10 @@ describe("FundamentalsPage", () => {
       );
       cy.contains(items[0].details).should("not.exist");
       button.click();
-      cy.get(firstItem).should("contain.text", items[0].details);
+      cy.getDataTestId("accordion-item-1").should(
+        "contain.text",
+        items[0].details
+      );
       button.click();
       cy.contains(items[0].details).should("not.exist");
     });
