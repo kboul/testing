@@ -13,7 +13,7 @@ export default function App() {
   const handleClick = () => setButonColor(newButtonColor);
 
   return (
-    <div className='App'>
+    <div className="App">
       <button
         disabled={checkboxValue}
         style={{ backgroundColor: checkboxValue ? "gray" : buttonColor }}
@@ -25,12 +25,12 @@ export default function App() {
       <br />
 
       <input
-        id='disable-button-checkbox'
+        id="disable-button-checkbox"
         onChange={(e) => setCheckboxValue(e.target.checked)}
-        type='checkbox'
+        type="checkbox"
         value={checkboxValue}
       />
-      <label htmlFor='disable-button-checkbox'>Disable button</label>
+      <label htmlFor="disable-button-checkbox">Disable button</label>
 
       <Posts />
     </div>

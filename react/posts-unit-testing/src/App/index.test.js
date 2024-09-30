@@ -16,7 +16,7 @@ test("renders a list of posts with one item", async () => {
 test("button has correct intial color", () => {
   render(<App />);
   const colorButton = screen.getByRole("button", {
-    name: "Change to Midnight Blue",
+    name: "Change to Midnight Blue"
   });
   expect(colorButton).toHaveStyle({ backgroundColor: "MediumVioletRed" });
 });
@@ -24,7 +24,7 @@ test("button has correct intial color", () => {
 test("button turns blue and text is changed when clicked", () => {
   render(<App />);
   const colorButton = screen.getByRole("button", {
-    name: "Change to Midnight Blue",
+    name: "Change to Midnight Blue"
   });
   fireEvent.click(colorButton);
   expect(colorButton).toHaveStyle({ backgroundColor: "MidnightBlue" });
@@ -36,7 +36,7 @@ test("initial conditions", () => {
   render(<App />);
   // check that the button starts out enabled
   const colorButton = screen.getByRole("button", {
-    name: "Change to Midnight Blue",
+    name: "Change to Midnight Blue"
   });
   expect(colorButton).toBeEnabled();
 
@@ -48,7 +48,7 @@ test("initial conditions", () => {
 test("button is disabled when checkbox is checked & its background color is gray", () => {
   render(<App />);
   const colorButton = screen.getByRole("button", {
-    name: "Change to Midnight Blue",
+    name: "Change to Midnight Blue"
   });
   // input id & label htmlFor should coincide
   const checkbox = screen.getByRole("checkbox", { name: "Disable button" });
