@@ -41,14 +41,16 @@ export default function FormsPage() {
       <ItemsAccordion items={items} />
       <TextField
         className={styles.input}
+        data-testid="subscribe-form"
         label="Email"
         variant="filled"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
       <Button
+        data-testid="subscribe-button"
         onClick={() => {
-          if (!inputValue.includes(".com")) {
+          if (inputValue && !inputValue.includes(".com")) {
             setSubMessage(`Invalid email: ${inputValue}!`);
           } else if (inputValue.length) {
             setSubMessage(`Successfully subbed: ${inputValue}!`);
