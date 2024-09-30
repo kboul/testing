@@ -3,7 +3,6 @@ import { Button, TextField } from "@mui/material";
 import { useReducer, useState } from "react";
 
 function grudgeReducer(state, action) {
-  console.log({ state, action });
   if (action.type === "ADD") {
     return [...state, action.payload];
   }
@@ -19,8 +18,6 @@ function grudgeReducer(state, action) {
 export default function GrudgeList() {
   const [grudges, dispatch] = useReducer(grudgeReducer, []);
   const [inputValue, setInputValue] = useState("");
-
-  console.log({ grudges });
 
   const title = grudges.length > 0 ? "Grudges" : "Add Some Grudges";
 
@@ -40,18 +37,27 @@ export default function GrudgeList() {
 
   return (
     <div style={{ margin: "20px" }}>
-      <h3 style={{ margin: "20px 0px" }}>{title}</h3>
+      <h3 data-testid="grudge-header" style={{ margin: "20px 0px" }}>
+        {title}
+      </h3>
       <div>
         <TextField
+          data-testid="grudge-input"
+          id="grudge-input"
           label="Add Grudge"
-          variant="filled"
-          value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           style={{ backgroundColor: "white" }}
+          variant="filled"
+          value={inputValue}
         />
       </div>
-      <Button onClick={addGrudge}>Add Grudge</Button>
-      <ul style={{ color: "white", listStyleType: "none" }}>
+      <Button data-testid="add-grudge-btn" onClick={addGrudge}>
+        Add Grudge
+      </Button>
+      <ul
+        data-testid="grudge-ul"
+        style={{ color: "white", listStyleType: "none" }}
+      >
         {grudges.length > 0 &&
           grudges.map((g) => {
             return (

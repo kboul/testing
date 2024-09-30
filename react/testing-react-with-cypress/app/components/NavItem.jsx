@@ -1,5 +1,9 @@
 import Link from "next/link";
 
-export default function NavItem({ label, path }) {
-  return <Link href={path}>{label}</Link>;
+export default function NavItem({ item }) {
+  return (
+    <Link data-testid={item.dataTestId} href={item.path}>
+      {item.label}
+    </Link>
+  );
 }
