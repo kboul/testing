@@ -1,0 +1,4 @@
+{
+  "port": 4000,
+  "static": "./public/json-server"
+}
