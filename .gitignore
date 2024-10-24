@@ -3,3 +3,6 @@ coverage
 dist
 
 .next
+
+coverage
+.nyc_output

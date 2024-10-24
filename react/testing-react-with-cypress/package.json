@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "cypress open"
+    "test:open": "cypress open",
+    "test:run:comp": "cypress run --component",
+    "test:coverage": "nyc report --reporter=html && open coverage/index.html"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -19,6 +21,9 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "cypress": "^13.15.0"
+    "@cypress/code-coverage": "^3.13.4",
+    "@istanbuljs/nyc-config-babel": "^3.0.0",
+    "cypress": "^13.15.0",
+    "nyc": "^17.1.0"
   }
 }
